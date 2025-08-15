@@ -1,28 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppFonts {
-  static TextStyle heading = GoogleFonts.poppins(
+  static TextStyle heading = const TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Roboto',
   );
-  static TextStyle subheading = GoogleFonts.poppins(
+  static TextStyle subheading = const TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Roboto',
   );
 
-  static TextStyle body = GoogleFonts.poppins(
+  static TextStyle body = const TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.normal,
+    fontFamily: 'Roboto',
   );
 
-  static TextStyle title = GoogleFonts.poppins(
+  static TextStyle title = const TextStyle(
     fontSize: 34,
     fontWeight: FontWeight.bold,
+    fontFamily: 'Roboto',
   );
-  static TextStyle splash = GoogleFonts.poppins(
+  static TextStyle splash = const TextStyle(
     fontSize: 50,
     fontWeight: FontWeight.bold,
     color: Colors.white,
+    fontFamily: 'Roboto',
   );
 }

@@ -30,6 +30,7 @@ class BaseApiService {
             body: jsonEncode(body),
           )
           .timeout(_config.connectionTimeout);
+      
       return _handleResponse(response);
     } catch (e) {
       throw _handleError(e);

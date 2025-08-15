@@ -83,7 +83,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       Column(
                         children: [
                           AppTextField(
-                            // controller: controller.nameController,
+                            controller: controller.userNameController,
                             hintText: 'Your Name',
                             prefixIcon: Icons.person,
                             validator: (value) {
@@ -164,6 +164,60 @@ class _AuthScreenState extends State<AuthScreen> {
                     PrimaryButton(
                       text: widget.isSignup ? "Sign Up" : "Sign In",
                       onPressed: () {
+                        // Validate form before proceeding
+                        if (widget.isSignup) {
+                          if (controller.userNameController.text.trim().isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Please enter your name'),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                            return;
+                          }
+                        }
+                        
+                        if (controller.emailController.text.trim().isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Please enter your email'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          return;
+                        }
+                        
+                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(controller.emailController.text.trim())) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Please enter a valid email'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          return;
+                        }
+                        
+                        if (controller.passwordController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Please enter your password'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          return;
+                        }
+                        
+                        if (controller.passwordController.text.length < 6) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Password must be at least 6 characters'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                          return;
+                        }
+                        
+                        // If all validations pass, proceed
                         widget.isSignup
                             ? controller.signup(context)
                             : controller.login(context);
@@ -176,6 +230,40 @@ class _AuthScreenState extends State<AuthScreen> {
 
                     const Center(
                       child: Text("or connect", style: TextStyle(fontSize: 16)),
+                    ),
+                    const SizedBox(height: 16),
+                    
+                    // Navigation Links
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            widget.isSignup 
+                                ? "Already have an account? " 
+                                : "Don't have an account? ",
+                            style: TextStyle(
+                              color: Theme.of(context).textTheme.bodyMedium?.color,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              if (widget.isSignup) {
+                                context.go('/');
+                              } else {
+                                context.go('/signup');
+                              }
+                            },
+                            child: Text(
+                              widget.isSignup ? "Sign In" : "Sign Up",
+                              style: TextStyle(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 16),
 

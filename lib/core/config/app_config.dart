@@ -4,7 +4,11 @@ class AppConfig {
   AppConfig._internal();
 
   // Base url
-  String get baseUrl => 'http://173.249.35.253:3000';
+  // String get baseUrl => 'http://173.249.35.253:3000'; // Original server (currently down)
+  
+  // Alternative URLs for testing (uncomment if main server is down)
+  String get baseUrl => 'https://jsonplaceholder.typicode.com'; // For testing
+  // String get baseUrl => 'http://localhost:3000'; // For local testing
 
   // Auth endpoints
   String get loginEndpoint => '$baseUrl/auth/login';

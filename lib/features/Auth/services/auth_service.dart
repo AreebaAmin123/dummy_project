@@ -9,6 +9,19 @@ class AuthService extends BaseApiService {
     required String password,
     required String name,
   }) async {
+    // For testing with jsonplaceholder
+    if (_config.baseUrl.contains('jsonplaceholder')) {
+      // Simulate successful signup
+      await Future.delayed(Duration(seconds: 1)); // Simulate network delay
+      return {
+        'success': true,
+        'data': {
+          'message': 'Account created successfully',
+          'user': {'name': name, 'email': email}
+        }
+      };
+    }
+    
     return postMethod(
       _config.registerEndpoint,
       body: {'email': email, 'password': password, 'name': name},
@@ -19,6 +32,19 @@ class AuthService extends BaseApiService {
     required String email,
     required String password,
   }) async {
+    // For testing with jsonplaceholder
+    if (_config.baseUrl.contains('jsonplaceholder')) {
+      // Simulate successful login
+      await Future.delayed(Duration(seconds: 1)); // Simulate network delay
+      return {
+        'success': true,
+        'data': {
+          'access_token': 'test_token_${DateTime.now().millisecondsSinceEpoch}',
+          'message': 'Login successful'
+        }
+      };
+    }
+    
     return postMethod(
       _config.loginEndpoint,
       body: {'email': email, 'password': password},

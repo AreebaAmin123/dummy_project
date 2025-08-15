@@ -42,10 +42,3 @@ class DialogService {
     );
   }
 }
-
-// DialogService.showCustomSnackbar(
-//   title: 'Success',
-//   message: 'Profile updated successfully!',
-//   icon: Icons.check_circle,
-//   backgroundColor: Colors.green,
-// );
